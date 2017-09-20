@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>JavaScript Exercises</title>
+
+	<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Muli:400,600,700,900" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<header>
+		<h1>Magic Hour: JavaScript Exercises</h1>
+	</header>
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #1
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that accepts a string containing up to 26 unique alphabetical characters, and returns a string containing the same characters in alphabetical order.
+				</p>
+				<p>
+					EX:
+					<br>sortGiftCode( 'abcdef' ) returns 'abcdef'
+					<br>sortGiftCode( 'pqksuvy' ) returns 'kpqsuvy'
+					<br>sortGiftCode( 'zyxwvutsrqponmlkjihgfedcba' ) returns 'abcdefghijklmnopqrstuvwxyz'
+				</p>
+				<code id="answer0" class="prettyprint answer">
+					function sortGiftCode(code) {
+					<br><span class="pd-lf-20">return code.split('').sort().join('');</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer0'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #2
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					An ATM allows for 4 or 6 digit PIN codes, and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits. Write a function that returns 'true' if passed a valid PIN, and 'false' if passed an invalid PIN.
+				</p>
+				<p>
+					EX1:
+					<br>validatePIN("1234") === true
+					<br>validatePIN("12345") === false
+					<br>validatePIN("a234") === false
+				</p>
+				<code id="answer1" class="prettyprint answer">
+					function validatePIN (pin) {
+					<br><span class="pd-lf-20">var pinlen = pin.length;</span>
+					<br><span class="pd-lf-20">var isCorrectLength = (pinlen == 4 || pinlen == 6);</span>
+					<br><span class="pd-lf-20">var hasOnlyNumbers = pin.match(/^\d+$/);</span>
+					<br>
+					<br><span class="pd-lf-20">if (isCorrectLength && hasOnlyNumbers) {</span>
+					<br><span class="pd-lf-40">return true;</span>
+					<br><span class="pd-lf-20">};</span>
+					<br>
+					<br><span class="pd-lf-20">return false;</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer1'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #3
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that takes an array of words and returns a single string (a sentence). You can ignore any need to sanitize words or add punctuation, but you should add spaces between each word. Be careful, there shouldn't be a space at the beginning or the end of the sentence!
+				</p>
+				<p>
+					EX:
+					<br>Given this as an input: ['hello', 'world', 'this', 'is', 'great'];
+					<br>Output should be: "hello world this is great”
+				</p>
+				<code id="answer2" class="prettyprint answer">
+					function smash(words) {
+					<br><span class="pd-lf-20">return words.join(' ');</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer2'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #4
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					In a factory a printer prints labels for boxes. For one kind of boxes the printer has to use colors which, for the sake of simplicity, are named with letters from 'a' to 'm'.
+				</p>
+				<p>
+					The colors used by the printer are recorded in a control string. For example a "good" control string would be 'aaabbbbhaijjjm' meaning that the printer used color 'a' three times, color 'b' four times, color 'h' one time, then color 'a' again, etc.
+				</p>
+				<p>
+					Sometimes there are problems: lack of colors, technical malfunction and a "bad" control string is produced such as 'aaaxbbbbyyhwawiwjjjwwm'.
+				</p>
+				<p>
+					You have to write a function which when given a string will output the error rate of the printer as a string representing a fraction whose numerator (top number) is the number of errors and the denominator (bottom number) is the length of the control string. Don't reduce this fraction to a simpler expression.
+				</p>
+				<p>
+					The string has a length greater or equal to one and contains only letters from ato z.
+				</p>
+				<p>
+					EX1:
+					<br>Input: "aaabbbbhaijjjm"
+					<br>Output: "0/14"
+					<br>EX2:
+					<br>Input: "aaaxbbbbyyhwawiwjjjwwm"
+					<br>Output: "8/22"
+				</p>
+				<code id="answer3" class="prettyprint answer">
+					function printerError(s) {
+					<br><span class="pd-lf-20">var regEx = /[a-m]/;</span>
+					<br><span class="pd-lf-20">var err = 0;</span>
+					<br><span class="pd-lf-20">var total = s.length;</span>
+
+					<br><span class="pd-lf-20">for(i = 0; i < total; i++) {</span>
+					<br><span class="pd-lf-40">var arr = s.split('');</span>
+					<br><span class="pd-lf-40">if(!arr[i].match(regEx)) {</span>
+					<br><span class="pd-lf-60">err++;</span>
+					<br><span class="pd-lf-40">};</span>
+					<br><span class="pd-lf-20">};</span>
+					<br><span class="pd-lf-20">return err + '/' + total;</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer3'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #5
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that accepts a number as an input and then squares each digit in the number. The output should be a number (not a string) that is comprised of all the resulting squares.
+				</p>
+				<p>
+					EX1:
+					<br>Input: 9119
+					<br>Output: 811181 (9*9 = 81, 1*1 = 1, 1*1 = 1, 9*9 = 81)
+					<br>EX2:
+					<br>Input: 2543
+					<br>Output: 425169 (2*2 = 4, 5*5 = 25, 4*4 = 16, 3*3 = 9)
+				</p>
+				<code id="answer4" class="prettyprint answer">
+					function squareDigits(num){
+					<br><span class="pd-lf-20">var numStr = num.toString().split('');</span>
+					<br><span class="pd-lf-20">var answer = '';</span>
+					<br>
+					<br><span class="pd-lf-20">for(i = 0; i < numStr.length; i++) {</span>
+					<br><span class="pd-lf-40">var num = Math.pow(parseInt(numStr[i]), 2);</span>
+					<br><span class="pd-lf-40">answer += num;</span>
+					<br><span class="pd-lf-20">};</span>
+					<br><span class="pd-lf-20">return parseInt(answer);</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer4'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #6
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that returns the smallest integer in an array.
+				</p>
+				<p>
+					EX1:
+					<br>Input: [34, 15, 88, 2]
+					<br>Output: 2
+					<br>EX2:
+					<br>Input: [34, -345, -1, 100]
+					<br>Output: -345
+				</p>
+				<code id="answer5" class="prettyprint answer">
+					function  findSmallestInt(args) {
+					<br><span class="pd-lf-20">return args.sort(function(a,b) {</span>
+					<br><span class="pd-lf-40">return a - b;</span>
+					<br><span class="pd-lf-20">})[0];</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer5'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #7
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that accepts two strings. This function should transform the first string into the second string, letter by letter. Your output should be the letter-by-letter transformation of the string.
+				</p>
+				<p>
+					EX:
+					<br>Input: stringOne = 'bubble gum', stringTwo = 'turtle ham';
+					<br>Output:
+					<br>'bubble gum
+					<br>tubble gum
+					<br>turble gum
+					<br>turtle gum
+					<br>turtle hum
+					<br>turtle ham'
+				</p>
+				<code id="answer6" class="prettyprint answer">
+					function mutateMyStrings(stringOne, stringTwo){
+					<br><span class="pd-lf-20">var answer = stringOne + '\n';</span>
+					<br><span class="pd-lf-20">var s1 = stringOne.split('');</span>
+					<br><span class="pd-lf-20">var s2 = stringTwo.split('');</span>
+					<br><span class="pd-lf-20">var lastVer = '';</span>
+
+					<br><span class="pd-lf-20">if (stringOne.length !== stringTwo.length) {</span>
+					<br><span class="pd-lf-40">return false;</span>
+					<br><span class="pd-lf-20">};</span>
+
+					<br><span class="pd-lf-20">for(i = 0; i < s1.length; i++) {</span>
+					<br><span class="pd-lf-40">last = s1.join('');</span>
+					<br><span class="pd-lf-40">s1[i] = s2[i];</span>
+					<br><span class="pd-lf-40">if (s1.join('') !== last) {</span>
+					<br><span class="pd-lf-60">answer += s1.join('') + '\n';</span>
+					<br><span class="pd-lf-40">}; </span>
+					<br><span class="pd-lf-20">};</span>
+					<br>
+					<br><span class="pd-lf-20">return answer;</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer6'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #8
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Given two arrays 'a' and 'b' write a function that checks whether the two arrays have the "same" elements, with the same multiplicities. "Same" means, here, that the elements in 'b' are the elements in 'a' squared, regardless of the order.
+				</p>
+				<p>
+					One or both of the inputs might be 'null' or an empty array. If this is the case, return 'false'.
+				</p>
+				<p>
+					EX1:
+					<br>Input:
+					<br>a = [121, 144, 19, 161, 19, 144, 19, 11]
+					<br>b = [121, 14641, 20736, 361, 25921, 361, 20736, 361]
+					<br>Output: true
+					<br>This returns true because 121 = 11*11 (and there is an 11 in 'a'), and 14641 = 121 * 121 (and there is a 121 in 'a'), etc.
+					<br>EX2:
+					<br>Input:
+					<br>a = [121, 144, 19, 161, 19, 144, 19, 11]
+					<br>b = [132, 14641, 20736, 361, 25921, 361, 20736, 361]
+					<br>Output: false
+					<br>This returns false because there is no number in 'a' that equals 132 when squared.
+				</p>
+				<code id="answer7" class="prettyprint answer">
+					function comp(array1, array2) {
+					<br><span class="pd-lf-20">if(array1.length !== array2.length || array1 === null || array2 === null) {</span>
+					<br><span class="pd-lf-40">return false;</span>
+					<br><span class="pd-lf-20">};</span>
+					<br>
+					<br><span class="pd-lf-20">var arr1 = array1.sort(function(a,b) {</span>
+					<br><span class="pd-lf-40">return a - b;</span>
+					<br><span class="pd-lf-20">});</span>
+					<br><span class="pd-lf-20">var arr2 = array2.sort(function(a,b) {</span>
+					<br><span class="pd-lf-40">return a - b;</span>
+					<br><span class="pd-lf-20">});</span>
+					<br>
+					<br><span class="pd-lf-20">for (var i = 0; i < array1.length; i++) {</span>
+					<br><span class="pd-lf-40">var val1 = arr1[i];</span>
+					<br><span class="pd-lf-40">var val2 = arr2[i];</span>
+					<br>
+					<br><span class="pd-lf-40">if(Math.pow(val1, 2) !== val2) {</span>
+					  <br><span class="pd-lf-60">return false;</span>
+					<br><span class="pd-lf-40">};</span>
+					<br><span class="pd-lf-20">};</span>
+					<br><span class="pd-lf-20">return true;</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer7'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #9
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					Write a function that will insert dashes ('-') between every instance of two odd numbers next to each other. Don't count zero as an odd number.
+				</p>
+				<p>
+					EX1:
+					<br>Input: 454793
+					<br>Output: 4547-9-3
+					<br>EX2:
+					<br>Input: 13579
+					<br>Output: 1-3-5-7-9
+				</p>
+				<code id="answer8" class="prettyprint answer">
+					function DashInsert(num) {
+					<br><span class="pd-lf-20">var numArr = num.toString().split('');</span>
+					<br><span class="pd-lf-20">var len = numArr.length;</span>
+					<br><span class="pd-lf-20">var final = [];</span>
+					<br>
+					<br><span class="pd-lf-20">for (var i = 0; i < len; i++){</span>
+					<br><span class="pd-lf-40">final.push(numArr[i]);</span>
+					<br><span class="pd-lf-40">if (numArr[i]%2 != 0){</span>
+					<br><span class="pd-lf-60">if (i+1 < len && numArr[i+1]%2 != 0) {</span>
+					<br><span class="pd-lf-80">final.push("-")
+					<br><span class="pd-lf-60">};</span>
+					<br><span class="pd-lf-40">};</span>
+					<br><span class="pd-lf-20">};</span>
+					<br><span class="pd-lf-20">return final.join("");</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer8'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+
+	<div class="section-wrapper">
+		<section class="exercises">
+			<h1 class="section-header">
+				Exercise #10
+			</h1>
+			<div class="codewrap noTopBorder">
+				<p>
+					You live in the city of Cartesia where all roads are laid out in a perfect grid. You arrived ten minutes too early to an appointment, so you decided to take the opportunity to go for a short walk. The city provides its citizens with a Walk Generating App on their phones -- everytime you press the button it sends you an array of one-letter strings representing directions to walk (eg. ['n', 's', 'w', 'e']). You know it takes you one minute to traverse one city block, so create a function that will return true if the walk the app gives you will take you exactly ten minutes (you don't want to be early or late!) and will, of course, return you to your starting point. Return false otherwise. You will always receive a valid array containing a random assortment of directions ('n', 's', 'e', or 'w' only). It will never give you an empty array (that's not a walk, that's standing still!).
+				</p>
+				<p>
+					EX1:
+					<br>Input: ['n','s','n','s','n','s','n','s','n','s']
+					<br>Output: true
+					<br>EX2:
+					<br>Input: ['w','e','w','e','w','e','w','e','w','e','w','e']
+					<br>Output: false
+					<br>EX3:
+					<br>Input: ['w']
+					<br>Output: false
+				</p>
+				<code id="answer9" class="prettyprint answer">
+					function isValidWalk(walk) {
+					<br><span class="pd-lf-20">var dx = 0;</span>
+					<br><span class="pd-lf-20">var dy = 0;</span>
+					<br><span class="pd-lf-20">var dt = walk.length;</span>
+					<br>
+					<br><span class="pd-lf-20">if (dt !== 10) {</span>
+					<br><span class="pd-lf-40">return false;</span>
+					<br><span class="pd-lf-20">};</span>
+					<br>
+					<br><span class="pd-lf-20">for (var i = 0; i < walk.length; i++) {</span>
+					<br><span class="pd-lf-40">if(walk[i] === 'n') {</span>
+					<br><span class="pd-lf-60">dy++;</span>
+					<br><span class="pd-lf-40">} else if(walk[i] === 's') {</span>
+					<br><span class="pd-lf-60">dy--;</span>
+					<br><span class="pd-lf-40">} else if(walk[i] === 'e') {</span>
+					<br><span class="pd-lf-60">dx++;</span>
+					<br><span class="pd-lf-40">} else if(walk[i] === 'w') {</span>
+					<br><span class="pd-lf-60">dx--;</span>
+					<br><span class="pd-lf-40">};</span>
+					<br><span class="pd-lf-20">};</span>
+					<br><span class="pd-lf-20">return dx === 0 && dy === 0;</span>
+					<br>};
+				</code>
+				<br>
+				<button class="btn" value='answer9'>Show/Hide Solution</button>
+			</div>
+		</section>
+	</div>
+	<script src="js/main.js"></script>
+</body>
+</html>
